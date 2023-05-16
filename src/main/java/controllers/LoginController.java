@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 		// TODO Auto-generated method stub
 		login = new Login();
 		request.setAttribute("login",login);
-		getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
         
     }
 
@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
 		if(!login.check()) {
 			System.out.println("ログイン失敗");
 			request.setAttribute("login", login );
-			getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(request, response);
 			return;
 		}
 		

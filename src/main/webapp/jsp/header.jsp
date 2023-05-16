@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-	<div class="container-fluid bg-dark text-white">
+	<div class="container-fluid bg-secondary text-white">
 	
 		<div class="row">
 			<h3 class="text-center mt-3">見積・納品・請求管理システム</h3>

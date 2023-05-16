@@ -38,7 +38,12 @@ public class MenuController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("nendo",menu.getNendo().toString());
 				
-				getServletContext().getRequestDispatcher("/menu.jsp").forward(request, response);
+				//メニューデータの取得
+				menu.getMenu();
+				
+				request.setAttribute("menu", menu);
+				
+				getServletContext().getRequestDispatcher("/jsp/menu.jsp").forward(request, response);
 	}
 
 	/**
