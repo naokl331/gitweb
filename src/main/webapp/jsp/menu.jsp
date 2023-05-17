@@ -50,13 +50,12 @@ h5 {
 		
 			<!-- マスタメンテ -->
 			<div class="col master-meintenance m-1">
-				<!--  -->
 				<h5 class="text-center mt-4 mb-3">マスタメンテ</h5>
 				
 				<!-- リスト -->
 				<ul>
 					<% for(Map map : menu.getMastamente()){ %>
-						<li> <a href="<% map.get("url"); %>"><%= map.get("menu_name").toString() %></a></li>
+						<li> <a href="<%= map.get("url").toString() %>"><%= map.get("menu_name").toString() %></a></li>
 					<% }%>
 				</ul>
 			</div>
@@ -68,7 +67,7 @@ h5 {
 				<!-- リスト -->
 				<ul>
 					<% for(Map map : menu.getBusiness()){ %>
-						<li> <a href="<% map.get("url"); %>"><%= map.get("menu_name").toString() %></a></li>
+						<li> <a href="<%= map.get("url").toString() %>"><%= map.get("menu_name").toString() %></a></li>
 					<% }%>
 				</ul>
 			</div>
@@ -80,7 +79,7 @@ h5 {
 				<!-- リスト -->
 				<ul>
 					<% for(Map map : menu.getSystem()){ %>
-						<li> <a href="<% map.get("url"); %>"><%= map.get("menu_name").toString() %></a></li>
+						<li> <a href="<%= map.get("url").toString() %>"><%= map.get("menu_name").toString() %></a></li>
 					<% }%>
 				</ul>
 			</div>

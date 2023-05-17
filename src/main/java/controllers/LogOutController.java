@@ -9,19 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import models.Menu;
-
 /**
- * Servlet implementation class MenuController
+ * Servlet implementation class LogOut
  */
-@WebServlet("/menu")
-public class MenuController extends HttpServlet {
+@WebServlet("/logout")
+public class LogOutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MenuController() {
+    public LogOutController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,28 +28,19 @@ public class MenuController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//年度の取得
-		Menu menu = new Menu();
-		menu.getNendoDB();	//DBからnendoを取得してフィールドに記憶
+		HttpSession session = request.getSession();	//make session instance
+		session.invalidate();	//session delete
 		
-		//sessionに年度を記憶
-		HttpSession session = request.getSession();
-		session.setAttribute("nendo",menu.getNendo().toString());
-		
-		//メニューデータの取得
-		menu.getMenu();
-		
-		request.setAttribute("menu", menu); //setAttributeのid名と一致
-		
-		getServletContext().getRequestDispatcher("/jsp/menu.jsp").forward(request, response);
+		//ログイン画面に戻す
+		response.sendRedirect("login");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

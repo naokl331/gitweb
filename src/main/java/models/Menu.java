@@ -76,7 +76,6 @@ public class Menu extends GetConnection {
 	public void getMenu() {
 		open();
 		
-		
 		mastamente = new ArrayList<Map<String,Object>>();	//マスタメンテ用
 		business = new ArrayList<Map<String,Object>>();			//業務用
 		system = new ArrayList<Map<String,Object>>();				//システム用
