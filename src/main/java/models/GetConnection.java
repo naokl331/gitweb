@@ -51,7 +51,7 @@ public class GetConnection {
 	public void close() {
 		//rsは存在したらclose
 		try {
-			if(Objects.isNull(rs)) rs.close();
+			if(!Objects.isNull(rs)) rs.close();
 			ps.close();
 			con.close();
 		} catch (SQLException e) {

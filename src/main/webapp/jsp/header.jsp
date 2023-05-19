@@ -20,7 +20,7 @@
 						<label>年度</label>
 						<input type="text" value="<%= session.getAttribute("nendo") %>" readonly>
 						<label>ログイン：<%= session.getAttribute("name") %></label>
-						<a href="#" class="link-warning">メニューへ戻る</a>
+						<a href="menu" class="link-warning">メニューへ戻る</a>
 					</p>
 				</div>
 		</div>
