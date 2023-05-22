@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-	<div class="container justify-">
+	<div class="container">
 		<div class="row">
 			<div class="col">
 				<h1 class="text-center mt-5">加藤堂経師店見積・納品・請求管理システム</h1>

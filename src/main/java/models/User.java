@@ -200,4 +200,77 @@ public class User extends GetConnection {
 			close();
 	}
 	
+	//ユーザ情報取得用メソッド
+	public void getUser() {
+		
+		//DBに接続する
+		open();
+		
+		//idをキーにその他の情報を取得する //完全なSQL文にすることでSQLインジェクションから守ることができる
+		String sql = "select * from m_user where id = '" + id + "'"; // [']["] + id + ["][']["]
+		//String sql = "select * from m_user where id = ?"; //プレースホルダーを使ってもいい　分かりやすい
+		try {
+			ps = con.prepareStatement(sql);
+			//ps.setString(1,id);
+			rs = ps.executeQuery();
+			rs.next();
+			
+			name = rs.getString("name");
+			pass = rs.getString("pass");
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		close();
+	}
+	
+	//編集登録時のデータチェック
+	public boolean check4Edit() {
+		//パスワード(確認用)が入力されていた時の関連チェック
+		if(pass2.length() > 0) {
+			if(!pass.equals(pass2)) {
+				msg = "パスワードとパスワード(確認用)が一致しません。";
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//update用メソッド
+	public void update() {
+		String sql;
+		open();
+		//pass2にデータを持っているかどうかで、SQLを分ける -> パスワードを変更するということ
+		if(!pass2.equals("")) {
+			sql = "update m_user set name = ?, pass = ? where id = ?";
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setString(1, name);
+				ps.setString(2, pass);
+				ps.setString(3, id);
+				ps.execute();
+				
+				
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+		}else {
+			//パスワードの変更なし
+			sql = "update m_user set name = ? where id = ?";
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setString(1, name);
+				ps.setString(2, id);
+				ps.execute();
+				
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			
+		}
+		close();
+	}
+	
 }

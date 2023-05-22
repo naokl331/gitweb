@@ -44,14 +44,14 @@
 			<div class="col-3"></div>
 			<div class="col-6 justify-content-center form_bg my-4 p-3 rounded">
 				<form action="user" name="userForm" method="post">
-					<label class="form-label">ID</label>
+					<label class="form-label">ID</label>  <!-- getReadonly()をスクリプトレットで囲むことで、編集ボタン押下時にsetReadonly("readonly")することでrequireのようにreadonly属性が付与される -->
 					<input class="form-control" type="text" name ="id" id="id" placeholder="ID" value="<%= user.getId() %>" <%= user.getReadonly() %> required>
 					<label class="form-label">名前</label>
 					<input class="form-control" type="text" name ="name" id="name" placeholder="名前" value="<%= user.getName() %>" required>
 					<label class="form-label">パスワード</label>
 					<input class="form-control" type="password" name ="pass" id="pass" placeholder="パスワード" value="<%= user.getPass() %>" required>
 					<label class="form-label">パスワード(確認)</label>
-					<input class="form-control" type="password" name="pass2" id="pass2" placeholder="パスワード(確認)" class="form-control" value="" required>
+					<input class="form-control" type="password" name="pass2" id="pass2" placeholder="パスワード(確認)" class="form-control" value="" >
 					<div class="btn-pos">
 						<button type="submit" name="param" value="<%= user.getParam() %>" class="btn btn-secondary btn-sm btn1">登録</button>
 						<button type="button" onclick="cancel()" class="btn btn-secondary btn-sm btn2">キャンセル</button>

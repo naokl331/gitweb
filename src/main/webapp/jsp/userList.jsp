@@ -85,8 +85,8 @@
 								<td class="text-center"><%= map.get("name") %></td>
 								<td class="text-center">
 									<form action="user" method="post">
-										<input type="hidden" name="id" value="<%= user.getId() %>">
-										<button type="submit" name="param" value="3" class="btn btn-outline-primary btn-sm">編集</button>
+										<input type="hidden" name="id" value="<%= map.get("id") %>">
+										<button type="submit" name="param" value="6" class="btn btn-outline-primary btn-sm">編集</button>
 									</form>
 								</td>
 							</tr>

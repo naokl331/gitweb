@@ -18,11 +18,13 @@
 			<div class="col"></div>
 			<div class="col">
 				<ul>
-				<li>
-					<form action="user" method="post">
-						<button class="btn btn-link" type="submit" name="param" value="2">新規登録を続ける</button>
-					</form>
+				<% if(request.getAttribute("dispFlg").equals("1")){ %>
+					<li>
+						<form action="user" method="post">
+							<button class="btn btn-link" type="submit" name="param" value="2">新規登録を続ける</button>
+						</form>
 					</li>
+				<% } %>
 					<li>
 						<form action="user">
 							<button class="btn btn-link" type="submit">ユーザー一覧に戻る</button>
