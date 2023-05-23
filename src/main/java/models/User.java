@@ -17,7 +17,8 @@ public class User extends GetConnection {
 	private String msg="";
 	private String readonly ="";
 	private String headline = "";
-	private String param = "";
+	private String param = "";		//登録ボタン用のparam
+	private String cancel = "";		//キャンセルボタン用のparam
 	
 	public String getHeadline() {
 		return headline;
@@ -75,7 +76,12 @@ public class User extends GetConnection {
 		this.pass2 = pass2;
 	}
 	
-	
+	public String getCancel() {
+		return cancel;
+	}
+	public void setCancel(String cancel) {
+		this.cancel = cancel;
+	}
 	
 	//検索ボタン押下の機能用メソッド
 	public void search() {
@@ -226,6 +232,16 @@ public class User extends GetConnection {
 	
 	//編集登録時のデータチェック
 	public boolean check4Edit() {
+		if(pass.length() < 6) {
+			msg = "6文字以上必要です。";
+			return false;
+		}
+		
+		//passの値を変えてもpass2に何も入力しなければDB更新はかからないが確認画面へ遷移できるので少し気持ち悪い
+		if(pass.length() >= 6) {
+			
+		}
+		
 		//パスワード(確認用)が入力されていた時の関連チェック
 		if(pass2.length() > 0) {
 			if(!pass.equals(pass2)) {
@@ -272,5 +288,6 @@ public class User extends GetConnection {
 		}
 		close();
 	}
+	
 	
 }

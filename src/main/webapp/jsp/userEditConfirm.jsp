@@ -51,9 +51,10 @@
 					<input class="form-control" type="text" name ="name" id="name" placeholder="名前" value="<%= user.getName() %>" readonly>
 					<label class="form-label">パスワード</label>
 					<input class="form-control" type="password" name ="pass" placeholder="パスワード" value="<%= user.getPass() %>" readonly>
+					<input type="hidden" name="pass2" value="<%= user.getPass2() %>">
 					<div class="btn-pos">
-						<button type="submit" name="param" value="4" class="btn btn-secondary btn-sm btn1">登録</button>
-						<button type="submit" name="param" value="5" class="btn btn-secondary btn-sm btn2">キャンセル</button>
+						<button type="submit" name="param" value="<%= user.getParam() %>" class="btn btn-secondary btn-sm btn1">登録</button>
+						<button type="submit" name="param" value="<%= user.getCancel() %>" class="btn btn-secondary btn-sm btn2">キャンセル</button>
 					</div>
 				</form>
 			</div>

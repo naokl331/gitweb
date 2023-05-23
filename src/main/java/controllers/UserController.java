@@ -17,7 +17,7 @@ import models.User;
 @WebServlet("/user")
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -55,25 +55,28 @@ public class UserController extends HttpServlet {
 		
 		//処理の分岐
 		if(param.equals("1")) {
-			search(request,response);
+			search(request,response);				// disp	userList
 		}else if(param.equals("2")) {
-			create(request, response);
-		}else if(param.equals("3")) {	//新規登録の登録ボタン
-			register(request, response);
-		}else if(param.equals("4")) {	//登録確認画面の登録ボタン
-			insert(request, response);
-		}else if(param.equals("5")) {	//登録確認画面のキャンセルボタン
-			createAgain(request, response);
+			create(request, response);				//	disp	userEdit(new.ver)
+		}else if(param.equals("3")) {
+			register(request, response);			//	disp	userEditConfirm(after new)
+		}else if(param.equals("4")) {
+			insert(request, response);				// disp	userRegistComplete
+		}else if(param.equals("5")) {
+			createAgain(request, response);	// disp	userEdit(again)
 		}else if(param.equals("6")) {
-			edit(request, response);
-		}else if(param.equals("7")) {	//編集ボタン押下後の登録ボタン
-			editCheck(request, response);
+			edit(request, response);					//	disp	userEdit(edit.ver)
+		}else if(param.equals("7")) {
+			editCheck(request, response);		//	disp	userEditConfirm(afeter edit)
+		}else if(param.equals("8")) {
+			update(request, response);			//	disp	userRegistComplete
+		}else if(param.equals("9")) {
+			createAgain(request, response);	// disp	userEdit(edit.ver)
 		}
 		
 	}
 	
 	protected void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("検索");
 		User user = new User();
 		user.setId(request.getParameter("id"));
 		user.setName(request.getParameter("name"));
@@ -82,20 +85,16 @@ public class UserController extends HttpServlet {
 		session.setAttribute("user4search",user);
 		
 		user.search();		//検索処理
-		
 		request.setAttribute("user", user);
-		
 		getServletContext().getRequestDispatcher("/jsp/userList.jsp").forward(request, response);
 	}
 	
 	protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("ユーザマスタ一覧->新規作成ボタン押下");
 		User user = new User();
-		this.dispUserEdit4New(request, response, user);
+		dispUserEdit4New(request, response, user);
 	}
 	
 	protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("ユーザ登録画面->登録ボタン押下");
 		User user = new User();
 		
 		//modelに画面入力値を持たせる
@@ -111,6 +110,8 @@ public class UserController extends HttpServlet {
 		}
 		
 		//チェック完了後 登録確認画面を出したい
+		user.setParam("4");
+		user.setCancel("5");
 		request.setAttribute("user", user);
 		getServletContext().getRequestDispatcher("/jsp/userEditConfirm.jsp").forward(request, response);
 		
@@ -125,7 +126,11 @@ public class UserController extends HttpServlet {
 		user.setName(request.getParameter("name"));
 		user.setPass(request.getParameter("pass"));
 		
-		this.dispUserEdit4New(request, response, user);
+		if(request.getParameter("param").equals("5")) {
+			dispUserEdit4New(request, response, user);
+		}else {
+			dispUserEdit4Edit(request, response, user);
+		}
 	}
 	
 	protected void insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -138,6 +143,55 @@ public class UserController extends HttpServlet {
 		user.insert();		//DBにユーザー情報格納
 		
 		request.setAttribute("dispFlg", "1");	//1 = 新規登録の完了画面
+		getServletContext().getRequestDispatcher("/jsp/userRegistComplete.jsp").forward(request, response);
+	}
+	
+	protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//modelのインスタンスを作る
+		User user = new User();
+		
+		//編集ボタン押下->押した行のデータの"id"をuser(model)に記憶させる
+		user.setId(request.getParameter("id"));
+		
+		//取得したidをキーに対象となるユーザーに情報を取得する
+		user.getUser();
+		
+		dispUserEdit4Edit(request, response, user);
+		}
+	
+	protected void editCheck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//modelのインスタンスを作る
+		User user = new User();
+		
+		//画面の入力値をmodelに保持
+		user.setId(request.getParameter("id"));
+		user.setName(request.getParameter("name"));
+		user.setPass(request.getParameter("pass"));
+		user.setPass2(request.getParameter("pass2"));
+		
+		//パスワード(確認用)が入力されていた場合の関連チェック
+		if(!user.check4Edit()) {
+			dispUserEdit4Edit(request, response, user);
+			return;
+		}
+		
+		//チェック完了後 登録確認画面を出したい
+		user.setParam("8");
+		user.setCancel("9");
+		request.setAttribute("user", user);
+		getServletContext().getRequestDispatcher("/jsp/userEditConfirm.jsp").forward(request, response);
+	}
+	
+	protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = new User();
+		user.setId(request.getParameter("id"));
+		user.setName(request.getParameter("name"));
+		user.setPass(request.getParameter("pass"));
+		user.setPass2(request.getParameter("pass2"));
+		
+		user.update();
+		
+		request.setAttribute("dispFlg", "2");	//2 = 編集登録の完了画面
 		getServletContext().getRequestDispatcher("/jsp/userRegistComplete.jsp").forward(request, response);
 	}
 	
@@ -156,39 +210,5 @@ public class UserController extends HttpServlet {
 		user.setParam("7");
 		request.setAttribute("user", user);	
 		getServletContext().getRequestDispatcher("/jsp/userEdit.jsp").forward(request, response);
-	}
-	
-	protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//modelのインスタンスを作る
-		User user = new User();
-		
-		//編集ボタン押下->押した行のデータの"id"をuser(model)に記憶させる
-		user.setId(request.getParameter("id"));
-		
-		//取得したidをキーに対象となるユーザーに情報を取得する
-		user.getUser();
-		
-		dispUserEdit4Edit(request, response, user);
-		
-		}
-	
-	protected void editCheck(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//modelのインスタンスを作る
-		User user = new User();
-		
-		//画面の入力値をmodelに保持
-		user.setId(request.getParameter("id"));
-		user.setName(request.getParameter("name"));
-		user.setPass(request.getParameter("pass"));
-		user.setPass2(request.getParameter("pass2"));
-		
-		//パスワード(確認用)が入力されていた場合の関連チェック
-		if(!user.check4Edit()) {
-			dispUserEdit4Edit(request, response, user);
-			return;
-		}
-		user.update();
-		request.setAttribute("dispFlg", "2");	//2 = 編集登録の完了画面
-		getServletContext().getRequestDispatcher("/jsp/userRegistComplete.jsp").forward(request, response);
 	}
 }
