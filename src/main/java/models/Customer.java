@@ -1,11 +1,12 @@
 package models;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Customer extends GetConnection {
-	//フィールド
+	//DB用
 	private String tokuisaki_no = "";
 	private String tokuisaki_name = "";
 	private String hurigana = "";
@@ -14,7 +15,11 @@ public class Customer extends GetConnection {
 	private String address2 = "";
 	private String tanto = "";
 	private String shiyo_flg = "";
+	
+	//画面用
 	private List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+	private String tokuisaki = "";
+	private int page = 0;			//List作成用ページ	現在paginationでどこのページを見ているか保持
 	
 	public String getTokuisaki_no() {
 		return tokuisaki_no;
@@ -69,6 +74,111 @@ public class Customer extends GetConnection {
 	}
 	public void setList(List<Map<String, Object>> list) {
 		this.list = list;
+	}
+	public String getTokuisaki() {
+		return tokuisaki;
+	}
+	public void setTokuisaki(String tokuisaki) {
+		this.tokuisaki = tokuisaki;
+	}
+	
+	
+	// ページ取得用メソッド
+	// 返り値：ページ数 (int型)
+	// 引数：なし
+	public int getPageCount() {
+		int page_cnt = 0;
+		//DBへのConnectionの確立
+		open();
+		
+		//SQL
+		StringBuilder sql = new StringBuilder();
+		StringBuilder where = new StringBuilder();
+		where.append("");
+		//基本となるSQL
+		sql.append("select count(*) cnt from m02_tokuisaki ");
+		//検索条件
+		//得意先
+			int ptn_flg = 0;
+			if(tokuisaki.length() > 0) {
+				try {
+					Integer.parseInt(tokuisaki);		//失敗するとcatchへ行く
+					//orとandがある場合、andが先に実行されてしまうルールがあるので、()をつけてorを先に実行するようにしている
+					where.append("where (tokuisaki_no = ? or tokuisaki_name like ?) ");
+					ptn_flg = 1;
+				}catch(Exception e) {
+					where.append("where tokuisaki_name like ? ");
+					ptn_flg = 2;
+				}
+			}
+			
+		//フリガナ
+		if(hurigana.length() > 0) {
+			if(ptn_flg == 0) {				//フリガナonly
+				where.append("where hurigana like ?");
+				ptn_flg = 3;
+			}else if(ptn_flg == 1) {	//得意先
+				where.append("and hurigana like ?");
+				ptn_flg = 4;
+			}else if(ptn_flg == 2) {
+				where.append("and hurigana like ?");
+				ptn_flg = 5;
+			}
+		}
+		
+		//PrepareStatement
+		try {
+			ps = con.prepareStatement(sql.toString() + where.toString());
+			//パラメータ
+			switch(ptn_flg) {
+				case 1:
+					ps.setInt(1, Integer.parseInt(tokuisaki));
+					ps.setString(2, "%" + tokuisaki + "%" );
+					break;
+				case 2:
+					ps.setString(1, "%" + tokuisaki + "%");
+					break;
+				case 3:
+					ps.setString(1, "%" + hurigana + "%");
+					break;
+				case 4:
+					ps.setInt(1, Integer.parseInt(tokuisaki));
+					ps.setString(2, "%" + tokuisaki + "%");
+					ps.setString(3, "%" + hurigana + "%");
+					break;
+				case 5:
+					ps.setString(1, "%" + tokuisaki + "%");
+					ps.setString(2, "%" + hurigana + "%");
+					break;
+			}
+			
+			//実行
+			rs = ps.executeQuery();
+			rs.next();
+			//行数の取得
+			int record = rs.getInt("cnt");
+			//ページ数の割り出し
+			/*page_cnt = record / 25;
+			if(record % 25 > 0) {
+				page_cnt++;
+			}*/
+			double temp = (double)record / 25;
+			page_cnt  = (int)Math.ceil(temp);		//Math.ceil(x) xの以上の最小の整数値を返す
+			//System.out.println(temp);
+			
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		close();
+		
+		return page_cnt;
+	}
+	public int getPage() {
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
 	}
 	
 }

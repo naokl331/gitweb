@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.logo{
+	position: relative;
+  	padding: 0.5em;
+	background: #a6d3c8;
+  	color: white;
+  	margin: 0 35%;
+  	}
+.logo::before {
+  position: absolute;
+  content: '';
+  top: 100%;
+  left: 0;
+  border: none;
+  border-bottom: solid 15px transparent;
+  border-right: solid 20px rgb(149, 158, 155);
+}
+
+.form_bg{
+	background-color: #b2ffd8;
+}
+
+.btn1{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.btn2{
+	margin-right: 10px;
+}
+.nametag{
+	margin-left: 10px;
+}
+
+.in{
+	margin-left: 20px;
+}
