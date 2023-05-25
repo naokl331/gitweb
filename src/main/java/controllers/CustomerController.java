@@ -36,26 +36,13 @@ public class CustomerController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("server");
 		response.setCharacterEncoding("UTF-8");
 		
-		//リクエストに乗ってきたデータをModelに格納する
-		
-		/*//Model Instance 
-		Customer customer = new Customer();
-		//リクエスト内のデータをmodelに記憶する
-		customer.setTokuisaki(request.getParameter("tokuisaki"));	//jsから飛んできたデータを取得
-		customer.setHurigana(request.getParameter("hurigana"));
-		
-		System.out.println(customer.getTokuisaki());
-		System.out.println(customer.getHurigana());
-		System.out.println(request.getParameter("param"));*/
-		
-		//処理の分岐
-		String param = request.getParameter("param");
+		//処理の分岐		
+		String param = request.getParameter("param");	//jsから飛んできたリクエストに入っている連想配列の名前が"param"の値を取ってくるということ
 		
 		if(param.equals("1")) {
-			getPages(request,response);
+			getPages(request,response);	//ページネーション表示用
 		}else if(param.equals("2")) {
 			getList(request, response);
 		}
@@ -75,9 +62,10 @@ public class CustomerController extends HttpServlet {
 		customer.setTokuisaki(request.getParameter("tokuisaki"));
 		customer.setHurigana(request.getParameter("hurigana"));
 		
-		//ページ取得用メソッドの呼び出し
-		response.getWriter().append(Integer.toString(customer.getPageCount()));
-		
+		//ページ取得用メソッドの呼び出し	
+		response.getWriter().append(Integer.toString(customer.getPageCount()));	//サーバーからクライアントへのレスポンスの内容を設定するための命令
+		//doGetに最初にあるresponse.getWriter().append("served:").append("getContext~()");みたいなやつは"served:"を表示してgetContext~でパスを表示するみたいなことになる
+		//responseはrequestをもらったところへresponseを返す。 appendは何個もつなげられる
 	}
 
 	protected void getList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -88,8 +76,14 @@ public class CustomerController extends HttpServlet {
 		customer.setTokuisaki(request.getParameter("tokuisaki"));
 		customer.setHurigana(request.getParameter("hurigana"));
 		customer.setPage(Integer.parseInt(request.getParameter("page")));
-		//データ取得
 		
+		//データ取得
+		customer.getTable();
+		
+		//modelをrequestに置く
+		request.setAttribute("customer", customer);
+		//HTMLをjavascriptに返す
+		getServletContext().getRequestDispatcher("/jsp/customerTable.jsp").forward(request, response);
 	}
 	
 }

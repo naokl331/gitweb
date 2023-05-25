@@ -34,6 +34,9 @@
         		<ul class="pagination" id="pagination"></ul>
     		</nav>
 		</div>
+		<div class="row justify-content-center>
+			<div class="col" id="customerList"></div>
+		</div>
 		
 	</div>
 </body>
