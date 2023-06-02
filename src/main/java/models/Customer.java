@@ -17,6 +17,8 @@ public class Customer extends GetConnection {
 	private String tanto = "";
 	private String shiyo_flg = "";
 	
+	private String header = "";
+	
 	//画面用
 	private List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 	private String tokuisaki = "";
@@ -87,6 +89,12 @@ public class Customer extends GetConnection {
 	}
 	public void setPage(int page) {
 		this.page = page;
+	}
+	public String getHeader() {
+		return header;
+	}
+	public void setHeader(String header) {
+		this.header = header;
 	}
 	
 	
@@ -283,5 +291,100 @@ public class Customer extends GetConnection {
 		
 		close();
 	}
+	
+	public void registNew() {
+		//DBコネクション
+		open();
+		
+		//---------現在の得意先NoのMax値を取得---------------
+		String sql = "select max(tokuisaki_no) tokuisaki_no from m02_tokuisaki";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			rs.next();
+			
+			int tokuisakiNo = rs.getInt("tokuisaki_no");
+			tokuisakiNo++;		//新しい得意先No
+			
+			//登録用SQL
+			sql = "insert into m02_tokuisaki values(?,?,?,?,?,?,?,?)";
+			
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, tokuisakiNo);
+			ps.setString(2, tokuisaki_name);
+			ps.setString(3, hurigana);
+			ps.setString(4, yubin_bng);
+			ps.setString(5, address1);
+			ps.setString(6, address2);
+			ps.setString(7, tanto);
+			ps.setInt(8, Integer.parseInt(shiyo_flg));
+			
+			ps.execute();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		close();
+	}
+	
+	
+	public void getData() {
+		open();
+		
+		String sql = "select * from m02_tokuisaki where tokuisaki_no = ?";
+		
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1,Integer.parseInt(tokuisaki_no));
+			
+			rs = ps.executeQuery();
+			 
+			rs.next();
+			
+			//	No.を基にデータを取得
+			tokuisaki_name = rs.getString("tokuisaki_name");
+			hurigana = rs.getString("hurigana");
+			yubin_bng = rs.getString("yubin_bng");
+			address1 = rs.getString("address1");
+			address2 = rs.getString("address2");
+			tanto = rs.getString("tanto");
+			shiyo_flg = rs.getString("shiyo_flg");
+			
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		close();
+	}
+	
+	public void editNew() {
+		
+		System.out.println("modelのeditNew()");
+		
+		//DBコネクション
+		open();
+				
+		try {
+			String sql = "update m02_tokuisaki set tokuisaki_name = ?, hurigana = ?, yubin_bng = ?, address1 = ?, address2 = ?, tanto = ?, shiyo_flg = ? where tokuisaki_no = ?";
+			
+			ps = con.prepareStatement(sql);
+			ps.setString(1, tokuisaki_name);
+			ps.setString(2, hurigana);
+			ps.setString(3, yubin_bng);
+			ps.setString(4, address1);
+			ps.setString(5, address2);
+			ps.setString(6, tanto);
+			ps.setInt(7, Integer.parseInt(shiyo_flg));
+			ps.setInt(8, Integer.parseInt(tokuisaki_no));
+			
+			ps.execute();
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		close();
+	}
+	
 	
 }

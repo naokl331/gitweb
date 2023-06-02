@@ -32,9 +32,9 @@
 					<% } %>
 				</td>
 				<td>
-					<form action="customer" method="post">
-						<input type="hidden" name="tokuisaki_no" value="<%= map.get("tokuisaki_no") %>">
-						<input type="hidden" name="param" value="">
+					<form action="customer" method="post" target="_blank">
+						<input type="hidden" name="tokuisaki_no" value="<%= map.get("tokuisaki_no") %>">	
+						<input type="hidden" name="param" value="5">
 						<button type="submit" class="btn btn-primary">編集</button>
 					</form>
 				</td>

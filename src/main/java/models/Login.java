@@ -53,7 +53,7 @@ public class Login extends GetConnection {
 		
 		//型チェック
 		if(pass.length() < 6) {
-			msg = "パスワードが６文字未満です。";
+			msg = "パスワードは6文字以上です。";
 			return false;
 		}
 		

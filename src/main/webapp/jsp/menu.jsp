@@ -42,6 +42,7 @@ h5 {
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	
 	<h3 class="text-center logo mt-4">メインメニュー</h3>
 	
 	<div class="container w-75">

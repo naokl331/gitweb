@@ -49,3 +49,61 @@
 		 }
 	 )
  }
+ 
+ 
+ //キャンセルボタン押下
+ function cancel(){
+	if(window.confirm("登録を中断して一覧画面に戻ります。よろしいですか？")){
+		window.close();
+	} 
+ }
+ 
+ 
+ //得意先新規登録ボタン押下
+ function registNew(){
+	 //必須チェック
+	 if( ($("#tokuisaki_name").val() == "") && ($("#hurigana").val() == "") ){
+		 $("#msg_name").text("必須入力");
+		 $("#msg_hurigana").text("必須入力");
+		 return;
+	 }
+	 
+	 if( ($("#tokuisaki_name").val() == "") && !($("#hurigana").val() == "") ){
+		 $("#msg_name").text("必須入力");
+		 $("#msg_hurigana").text("");
+		 return;
+	 }
+	 
+	if( !($("#tokuisaki_name").val() == "") && ($("#hurigana").val() == "") ){
+		 $("#msg_name").text("");
+		 $("#msg_hurigana").text("必須入力");
+		 return;
+	 }
+
+
+	 //登録確認
+	 if(!window.confirm("この内容で登録します。よろしいですか？")){
+		 return;
+	 }
+	 
+	  $.post(
+		 "customer",
+		 $("form").serialize(),
+		 function(rtn){
+			if(window.confirm(rtn)){
+				//新規登録を続ける場面
+				//alert("新規登録をつづける場面");
+				//画面をまっさらにしたい
+				$("form")[0].reset();
+				return;
+			}	 
+			//一覧に戻る
+			window.close();
+		 } 
+	);
+	
+ }
+ 
+ 
+ 
+ 
