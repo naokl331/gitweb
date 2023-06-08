@@ -1,0 +1,13 @@
+package com.example.katodo.restcontroller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class GetCustomerList {
+
+	@PostMapping("/getListforCustomer")
+	public void getList() {
+		
+	}
+	
+}

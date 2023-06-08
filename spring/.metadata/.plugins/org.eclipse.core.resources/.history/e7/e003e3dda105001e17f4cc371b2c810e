@@ -1,0 +1,25 @@
+
+
+
+//読み込み時に自動起動
+$(function(){
+	
+	let startFlg = $("searchFlg").val();
+	alert(startFlg);
+	
+});
+
+
+function searchEdmng(){
+	
+	let data = $("#searchForm").serialize();
+	
+	$.post(
+		"getPages4Edmng",
+		data,
+		function(rtn){
+			alert(rtn);
+		}
+	)
+	
+}

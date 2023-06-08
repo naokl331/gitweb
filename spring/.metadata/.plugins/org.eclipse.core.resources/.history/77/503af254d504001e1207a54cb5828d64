@@ -1,0 +1,49 @@
+
+
+function searchCustomer(){
+	
+	let data = $("#searchForm").serialize(); //クエリ文字が保存
+	
+	$.post(
+		"getPages4Customer",
+		data,
+		function(rtn){
+			//alert(rtn);
+			if(rtn == 0){
+				$("#pagination").twbsPagination('destroy');
+				$("#pagination").text("該当するデータはありません");
+				return;
+			}
+			//ページネーション表示
+			$("#pagination").twbsPagination('destroy');	//前のページネーション情報を消去する
+			$("#pagination").twbsPagination({
+				totalPages: rtn,
+				visiblePages: 5,
+				onPageClick: function(event,page){
+					
+					getList(data,page);	//リスト取得用functionの呼び出し
+				
+				}
+			});
+		}
+	);
+}
+
+
+ //リスト取得用function
+ function getList(data,page){
+	 
+	 let listdata = data + "&page=" + page;
+	 alert(listdata);
+	 
+	 $.post(
+		 "getList4Customer",
+		 listdata,
+		 function(rtn){
+			 alert(rtn);
+			 //$("#customerList").html(rtn);
+
+		 }
+	 )
+ }
+ 

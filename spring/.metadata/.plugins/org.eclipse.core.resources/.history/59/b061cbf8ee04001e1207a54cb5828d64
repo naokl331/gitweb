@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>header</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+<style>
+	.header{background-color: black; color: ghostwhite;}
+	body{background-color: #d4dcda;}
+</style>
+</head>
+<body>
+	<div class="container-fluid header">
+		<div class="row">
+			<h1 class="text-center my-2">Katodo System</h1>
+		</div>
+		
+		<div class="row justify-content-end py-3">
+			<div class="col-6">
+				<label>年度:</label>
+				<input type="text" th:value="${session.year}" readonly>
+				<label>ログイン:</label>
+				<span th:text="${session.name}"></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/customerList.css">
+</head>
+<body>
+	<div th:replace="header.html"></div>
+	
+	<h3 class="text-center my-4">得意先一覧</h3>
+	
+	<div class="container">
+		
+		<!-- 検索エリア(得意先名、フリガナ、担当者名<全て曖昧検索>) -->
+		<div class="row justify-content-center">
+			<div class="col-8 search_area py-3 m-2">
+				<div class="row">
+					<form name="search">
+						<div clas="col">
+							<input type="text" name="tokuisaki_name" id="tokuisaki_name" value="" placeholder="得意先名">
+						</div>
+						
+						<div class="col">
+						<input type="text" name="hurigana" 		 id="tokuisaki_name" value="" placeholder="ﾌﾘｶﾞﾅ">
+						</div>
+						<div class="col">
+						<input type="text" name="tanto" 		 id="tokuisaki_name" value="" placeholder="担当者名">	
+						</div>	
+						<button type="button" onclick="">検索</button>
+						<button type="button" onclick="">新規作成</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

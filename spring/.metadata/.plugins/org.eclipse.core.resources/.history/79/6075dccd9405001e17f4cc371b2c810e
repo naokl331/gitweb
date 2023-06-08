@@ -1,0 +1,9 @@
+
+
+function searchEdmng(){
+	
+	let data = $("#searchForm").serialize();
+	
+	
+	
+}

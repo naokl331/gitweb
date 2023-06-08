@@ -1,0 +1,45 @@
+package com.example.katodo.restcontroller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.katodo.data.CustomerData;
+import com.example.katodo.repositry.CustomerRepository;
+
+@RestController
+public class UpdateCustomerController {
+
+	@Autowired
+	CustomerRepository cr;
+	
+	//------------------------------------------------
+	//			  得意先編集完了画面表示
+	//------------------------------------------------
+	@PostMapping("/updateCustomer")
+	public String updateCustomer(@ModelAttribute("cd") CustomerData cd , Model model) {
+		
+		System.out.println(model.toString());
+		
+		cr.updateCustomer(cd);
+		
+		return "得意先の編集が完了しました。";
+	}
+	
+	
+	//------------------------------------------------
+	//			  得意先新規登録完了画面表示
+	//------------------------------------------------
+	@PostMapping("/createNewCustomer")
+	public String createNewCustomer(@ModelAttribute("cd") CustomerData cd , Model model) {
+		
+		System.out.println(model.toString());
+		
+		cr.createNewCustomer(cd);
+		
+		return "得意先の新規登録が完了しました。";
+	}
+	
+}

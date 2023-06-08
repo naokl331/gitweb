@@ -1,0 +1,6 @@
+package com.example.katodo.repositry;
+
+@Repository
+public class MenuRepository {
+
+}

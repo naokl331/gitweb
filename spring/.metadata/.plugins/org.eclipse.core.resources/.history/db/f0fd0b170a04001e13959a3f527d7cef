@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.body{background-color:#f9eee8 ;}
+
+.row{background-color: #626D71;}
+
+.masta{background-color:#CDCDC0 ;}
+
+.business{background-color:#DDBC95 ;}
+
+.system{background-color:#B38867 ;}

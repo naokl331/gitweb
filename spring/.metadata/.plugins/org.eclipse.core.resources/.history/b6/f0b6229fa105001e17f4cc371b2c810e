@@ -1,0 +1,15 @@
+
+
+function searchEdmng(){
+	
+	let data = $("#searchForm").serialize();
+	
+	$.post(
+		"getPages4Edmng",
+		data,
+		function(rtn){
+			alert(rtn);
+		}
+	)
+	
+}

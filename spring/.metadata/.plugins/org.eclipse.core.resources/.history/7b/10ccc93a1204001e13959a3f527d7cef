@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:replace="header.html"></div>
+	
+	<h3 class="text-center">得意先一覧</h3>
+	
+	<div class="container">
+		
+		<!-- 検索エリア(得意先名、フリガナ、担当者名<全て曖昧検索>) -->
+		<div class="row">
+			<div class="col-8 bg-info">
+		</div>
+	</div>
+</body>
+</html>

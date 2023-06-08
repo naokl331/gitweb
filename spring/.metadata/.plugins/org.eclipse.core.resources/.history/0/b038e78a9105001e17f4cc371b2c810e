@@ -1,0 +1,7 @@
+package com.example.katodo.data;
+@Data
+public class EdmngData {
+
+	
+	
+}

@@ -1,0 +1,22 @@
+package com.example.katodo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.katodo.data.LoginData;
+
+@Service
+public class LoginService {
+
+	public boolean check(LoginData ld) {
+		//必須チェック
+		
+		//型チェック
+		
+		//存在チェック
+		
+		
+		
+		return true;
+	}
+	
+}

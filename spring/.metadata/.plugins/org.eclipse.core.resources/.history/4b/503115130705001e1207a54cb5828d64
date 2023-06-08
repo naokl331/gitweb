@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:replace="~{header.html}"></div>
+	
+	<div class="container justify-content-center">
+		
+		<h3 class="text-center my-4">見積・納品データ一覧</h3>
+		
+		<div class="row">
+			<div class="col">
+				<table class="table table-borderd table-striped table-dark">
+					<tr>
+						<th>得意先</th>
+						<th><input type="text"></th>
+						<th>工事完了日</th>
+						<th><input type="date">～<input type="date"></th>
+					</tr>
+					
+					<tr>
+						<th>物件</th>
+						<th><input type="text"></th>
+						<th>見積書作成日</th>
+						<th><input type="date">～<input type="date"></th>
+					</tr>
+					
+					<tr>
+						<th>担当</th>
+						<th><input type="text"></th>
+						<th>納品書作成日</th>
+						<th><input type="date">～<input type="date"></th>
+					</tr>
+					
+					<tr>
+						<th>部門</th>
+						<th><input type="text"></th>
+						<th>発注番号</th>
+						<th><input type="text">～<input type="text"></th>
+					</tr>
+					
+					<tr>
+						<th></th>
+						<th><button type="button">検索</button></th>
+						<th><button type="button">新規作成</button></th>
+						<th></th>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+		
+	</div>
+	
+</body>
+</html>

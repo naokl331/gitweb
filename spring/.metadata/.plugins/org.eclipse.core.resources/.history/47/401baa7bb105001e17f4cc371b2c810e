@@ -1,0 +1,11 @@
+package com.example.katodo.repositry;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class EdmngRepository {
+
+	@Autowired
+	
+	
+}

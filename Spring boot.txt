@@ -1,0 +1,50 @@
+Spring boot DBとの連携
+
+src/main/resources/application.properties の中を編集
+
+
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/katodo
+spring.datasource.username=postgres
+spring.datasource.password=postgres
+
+Javaオンリーだと libにorg.postgresqlのドライバをインストールしてきて配置しなきゃいけなかったが、
+Springbootのプロジェクトを作成するときに、postgresのDriverをインストールしたので、
+それを記述してあげるだけでpostgresqlに接続することができる。
+
+Havaオンリーだとmodelを作ってそこに、フィールド、セッターゲッター、メソッドからなっていたが、
+Springbootだと フィールド(Dataクラス)とDBとのやり取りをする(Repositry)の二つに分散する。
+
+Viewは、JSP -> Thymeleafテンプレート(HTML)
+
+src/main/javaの下にcom.example.katodoというファイルがあるがこれは、com/example/katodoの意味
+よってその下にパッケージを作るときは com.example.katodo.controllerなどと作る
+
+src/main/resources/static/ この階層に　css js フォルダにつくる
+
+eclipse->ウィンドウ->設定->web->HTMLファイル->エディター->テンプレート->thymeleaf用のテンプレートを作成する
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="${encoding}">
+<title>Insert title here</title>
+</head>
+<body>
+${cursor}
+</body>
+</html>
+
+html5のテンプレートをコピーしてthymeleaf仕様のものを作る。
+html新規作成のドロップダウンに変更しておく
+
+src/main/resources/templates/この下にhtmlを作る(view)
+HTMLファイル テンプレートをthymeleaf仕様に変更する
+
+controllerパッケージにクラスLoginControllerをつくり、もとからあるメソッドの上に@Controllerｎアノテーションをつける
+
+KatodoApplication.javaがTomcat立ち上げの役割-> SpringBootアプリケーションの実行
+
+全てただのクラスを作って、アノテーションで役割分担する。
+@Dataとか@Serviceとか
+

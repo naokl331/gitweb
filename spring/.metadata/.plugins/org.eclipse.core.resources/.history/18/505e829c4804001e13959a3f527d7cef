@@ -1,0 +1,30 @@
+package com.example.katodo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.katodo.data.CustomerData;
+
+@Controller
+public class CustomerController {
+	
+	//------------------------------------------------
+	//			  得意先画面の初期表示
+	//------------------------------------------------
+	@GetMapping("/customer")
+	public String index() {
+		return "customerList";	//htmlを投げる
+	}
+	
+	
+	@PostMapping("/getListforCustomer")
+	public String getList(@ModelAttribute("cd") CustomerData cd , Model model) {
+		
+		
+		
+		return "";
+	}
+}

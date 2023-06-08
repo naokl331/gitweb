@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.btn-pos{
+	float: right;
+	margin: 20px 10px 10px 10px;
+}
+
+.form_bg{
+	background-color: #c97586;
+}

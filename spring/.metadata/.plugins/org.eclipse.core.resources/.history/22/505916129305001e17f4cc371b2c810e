@@ -1,0 +1,18 @@
+package com.example.katodo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class EdmngController {
+
+	//------------------------------------------------
+	//			  受注管理画面表示
+	//------------------------------------------------
+	@GetMapping("/edmng")
+	public String index(@ModelAttribute("ed") EdmngData ed, Model model) {
+		
+		return "edmng";
+	}
+	
+}

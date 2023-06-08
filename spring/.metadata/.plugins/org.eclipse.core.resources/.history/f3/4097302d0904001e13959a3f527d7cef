@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Menu</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+	<div th:replace="header.html"></div>
+	
+	<h3 class="text-center my-4">メインメニュー</h3>
+	
+	<div class="container">
+		
+		<div class="row justify-content-center menu">
+			
+			<div class="col m-2 masta">
+				<h4 class="text-center my-3">マスタメンテ</h4>
+				<ul th:each="map:${md.ls_mastamente}">
+					<li>
+						<a th:href="${map.url}" th:text="${map.menu_name}"></a>	
+					</li>
+				</ul>
+			</div>
+			
+			<div class="col m-2 business">
+				<h4 class="text-center my-3">業務</h4>
+				<ul th:each="map:${md.ls_business}">
+					<li>
+						<a th:href="${map.url}" th:text="${map.menu_name}"></a>	
+					</li>
+				</ul>
+			</div>
+			
+			<div class="col m-2 system">
+				<h4 class="text-center my-3">システム</h4>
+				<ul th:each="map:${md.ls_system}">
+					<li>
+						<a th:href="${map.url}" th:text="${map.menu_name}"></a>	
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</body>
+</html>

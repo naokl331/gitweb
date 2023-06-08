@@ -1,0 +1,8 @@
+autoProposeCode=<\=\#
+commentBorder=\#4e8f00 | null | false | false | false | false
+commentText=\#4e8f00 | null | false | false | false | false
+eclipse.preferences.version=1
+elementNamesToIgnore=router-view
+newFileTemplateName=HTML5(Thymeleaf)
+org.eclipse.wst.sse.ui.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="true" context\="html_new" deleted\="false" description\="HTML5(Thymeleaf)" enabled\="true" name\="HTML5(Thymeleaf)">&lt;\!DOCTYPE html&gt;\r\n&lt;html xmlns\:th\="http\://www.thymeleaf.org"&gt;\r\n&lt;head&gt;\r\n&lt;meta charset\="${encoding}"&gt;\r\n&lt;title&gt;Insert title here&lt;/title&gt;\r\n&lt;/head&gt;\r\n&lt;body&gt;\r\n${cursor}\r\n&lt;/body&gt;\r\n&lt;/html&gt;</template></templates>
+tagAttributeValue=\#0080ff | null | false | false | false | false

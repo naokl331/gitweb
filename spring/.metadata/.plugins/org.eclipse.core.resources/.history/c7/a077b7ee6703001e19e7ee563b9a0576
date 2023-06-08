@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+	<h1 class="text-center">Katodo System</h1>
+	<h3 class="text-center">Login</h3>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-5">
+				<form action="login" method="post">
+					<label class="form-label">ID:</label>
+					<input class="form-control" "text" name="id" th:value="${ld.id}">	<!-- thはthymeleafのth -->
+					<label class="form-label">Password:</label>
+					<input class="form-control" type="password" name="pass" th:value="${ld.pass}">
+					<button class="btn btn-primary" type="submit">LOGIN</button>
+				</form>
+				<div th:text="${ld.msg}"></div>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>

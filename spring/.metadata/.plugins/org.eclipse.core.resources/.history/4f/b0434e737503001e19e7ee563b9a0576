@@ -1,0 +1,25 @@
+package com.example.katodo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.example.katodo.data.LoginData;
+
+@Controller
+public class MenuController {
+
+	
+	
+	
+	//------------------------------------------------
+	//			  メニュー画面の初期表示
+	//------------------------------------------------
+	@GetMapping("/menu")
+	public String index(@ModelAttribute("ld") LoginData ld, Model model) {
+		return "menu";
+	}
+	
+	
+}

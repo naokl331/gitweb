@@ -1,0 +1,25 @@
+package com.example.katodo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.katodo.data.LoginData;
+
+@Service
+public class LoginService {
+
+	public boolean check(LoginData ld) {
+		//必須チェック
+		if(ld.getId().equals("") || ld.getPass().equals("")) {
+			ld.setMsg("IDとパスワードは必須入力です。");
+			
+		}
+		//型チェック
+		
+		//存在チェック
+		
+		
+		
+		return true;
+	}
+	
+}

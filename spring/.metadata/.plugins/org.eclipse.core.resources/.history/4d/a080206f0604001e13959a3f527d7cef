@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Menu</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+	<div th:replace="header.html"></div>
+	
+	<h3 class="text-center my-4">メインメニュー</h3>
+	
+	<div class="container">
+		
+		<div class="row justify-content-center menu">
+			
+			<div class="col-3 m-1 masta">
+				<h4 class="text-center">マスタメンテ</h4>
+			</div>
+			
+			<div class="col-3 m-1 business">
+				<h4 class="text-center">業務</h4>
+			</div>
+			
+			<div class="col-3 m-1 system">
+				<h4 class="text-center">システム</h4>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+</body>
+</html>

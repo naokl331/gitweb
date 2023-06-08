@@ -1,0 +1,8 @@
+package com.example.katodo.data;
+
+import lombok.Data;
+
+@Data
+public class CustomerData {
+
+}

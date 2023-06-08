@@ -1,0 +1,6 @@
+package com.example.katodo.restcontroller;
+
+@RestController
+public class GetCustomerList {
+
+}

@@ -1,0 +1,15 @@
+package com.example.katodo.restcontroller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class GetPagesController {
+
+	//-------------------------------------
+	//		得意先一覧用ページ数返却
+	//-------------------------------------
+	@PostMapping("/getPages4Customer")
+	public int forCustomer() {
+		
+	}
+}

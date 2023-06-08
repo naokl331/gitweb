@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/customer.js"></script>
+</head>
+<body>
+	<h1>customerTable</h1>
+	
+	<table class="table table-borderd table-striped">
+		<tr>
+			<th>得意先No</th>
+			<th>得意先名</th>
+			<th>フリガナ</th>
+			<th>担当</th>
+			<th>使用フラグ</th>
+			<th>編集</th>
+		</tr>
+		
+			<tr th:each="map:${cd.list}">
+				
+				<td th:text="${map.tokuisaki_no}"></td>
+				<td th:text="${map.tokuisaki_name}"></td>
+				<td th:text="${map.hurigana}"></td>
+				<td th:text="${map.tanto}">
+				<td th:if="${map.shiyo_flg} == 1" th:text="可">不可</td>
+				<td th:else>不可</td>
+				<td>
+					<form id="edit" target="_blank">
+						<button type="button" onclick="editCustomer()" class="btn btn-primary">編集</button>
+					</form>
+				</td>
+			</tr>
+		
+	</table>
+</body>
+</html>

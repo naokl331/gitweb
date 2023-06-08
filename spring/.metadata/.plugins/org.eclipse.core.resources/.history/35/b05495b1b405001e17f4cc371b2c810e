@@ -1,0 +1,74 @@
+package com.example.katodo.repositry;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.example.katodo.data.EdmngData;
+
+@Repository
+public class EdmngRepository {
+
+	@Autowired
+	JdbcTemplate jt;
+	
+	//--------------------------------------------
+	//	受注管理ページネーション用ページ数
+	//--------------------------------------------
+	public int getPageCount(EdmngData cd) {
+		//SQLの動的生成と、パラメータのセット
+		StringBuilder sql = new StringBuilder();
+		StringBuilder where = new StringBuilder();
+		List<Object> param = new ArrayList<Object>();
+		
+		//基本的なSQL
+		sql.append("select ");
+		sql.append("from ");
+		sql.append("d01_eddb as d01 ");
+		
+		
+		//得意先名
+		if(!cd.getTokuisaki_name().equals("")) {
+			where.append("where tokuisaki_name like ? ");
+			param.add("%" + cd.getTokuisaki_name() + "%");
+		}
+		
+		//ﾌﾘｶﾞﾅ
+		if(!cd.getHurigana().equals("")) {
+			if(where.length() == 0) {
+				where.append("where hurigana like ? ");
+			}else {
+				where.append("and hurigana like ? ");
+			}
+			param.add("%" + cd.getHurigana() + "%");
+		}
+		
+		//担当
+		if(!cd.getTanto().equals("")) {
+			if(where.length() == 0) {
+				where.append("where tanto like ?");
+			}else {
+				where.append("and tanto like ?");
+			}
+			param.add("%" + cd.getTanto() + "%");
+		}
+		
+		//SQLにWhere句を追加
+		sql.append(where.toString());
+		
+		//実行
+		Map<String,Object> map = jt.queryForMap(sql.toString(),param.toArray());
+		int rec = Integer.parseInt(map.get("cnt").toString());
+		int pageCnt = rec / 25;
+		if(rec % 25 > 0) pageCnt++;
+		
+		return pageCnt;
+		
+	}
+	
+	
+}

@@ -1,0 +1,28 @@
+package com.example.katodo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.katodo.data.LoginData;
+
+@Controller
+public class LoginController {
+
+	//ログイン画面の初期表示
+	@GetMapping("/")	//"/"]はlocalhost:8080の後ろに何もないということ
+	public String index(@ModelAttribute("ld") LoginData ld, Model model) {
+		return "login";
+	}
+	
+	//ログインボタン押下
+	@PostMapping("/login")	//"login"というpostrequestを受け取る
+	public String login(@ModelAttribute("ld") LoginData ld, Model model) {	//@ModelAtrribute("名前") htmlで使う名前を設定できる
+		ld.setMsg("set Msg");
+		System.out.println(model.toString());
+		return "login";
+	}
+
+}

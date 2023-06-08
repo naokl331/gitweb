@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="js/jquery-3.7.0.min.js"></script>
+<script src="js/jquery.twbsPagination.min.js"></script>
+<script src="js/edmng.js"></script>
+</head>
+<body>
+	<div th:replace="~{header.html}"></div>
+	
+	<div class="container justify-content-center">
+		
+		<h3 class="text-center my-4">見積・納品データ一覧</h3>
+		
+		<div class="row">
+			<div class="col">
+				
+				<input type="hidden" id="search_Flg" value="0">
+				
+				<form id="searchForm" action="edRegistNew" method="post">
+					<input type="hidden" name="searchFlg" 	id="searchFlg" 	th:value="${ed.searchFlg}">
+					<input type="hidden" name="page" 		id="page" 		th:value="${ed.page}">
+					<input type="hidden" name="startPage" 	id="startPage" 	th:value="${ed.startPage}">
+					
+					<table class="table table-borderd table-striped table-dark">
+						<tr>
+							<th>得意先</th>
+							<th><input type="text" name="tokuisaki_name" th:value="${ed.tokuisaki_name}"></th>
+							<th>工事完了日</th>
+							<th><input type="date"  name="work_comp_begin" th:value="${ed.work_comp_begin}">～<input type="date"  name="work_comp_end" th:value="${ed.work_comp_end}"></th>
+						</tr>
+						
+						<tr>
+							<th>物件</th>
+							<th><input type="text"></th>
+							<th>見積書作成日</th>
+							<th><input type="date">～<input type="date"></th>
+						</tr>
+						
+						<tr>
+							<th>担当</th>
+							<th><input type="text"></th>
+							<th>納品書作成日</th>
+							<th><input type="date">～<input type="date"></th>
+						</tr>
+						
+						<tr>
+							<th>部門</th>
+							<th><input type="text"></th>
+							<th>発注番号</th>
+							<th><input type="text">～<input type="text"></th>
+						</tr>
+						
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th><button type="button" onclick="searchEdmng()">検索</button> <button type="submit" >新規作成</button></th>
+							
+						</tr>
+						
+					</table>
+				
+				</form>
+			</div>
+		</div>
+		
+		<!-- ページネーション表示用 -->
+		<div class="row justify-content-center">
+			<nav aria-label="Page navigation" class="col-6">
+				<ul class="pagination" id="pagination"></ul>
+			</nav>
+		</div>
+		
+		<!-- リスト表示 -->
+		<div class="row justify-content-center">
+			<div class="col-6" id="customerList"></div>
+		</div>
+		
+	</div>
+	
+</body>
+</html>

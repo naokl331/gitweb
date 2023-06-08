@@ -1,0 +1,19 @@
+package com.example.katodo.data;
+
+import java.util.List;
+import java.util.Map;
+
+import lombok.Data;
+
+@Data
+public class EdmngData {
+	private String tokuisaki_name;
+	private String koji_kanryo_begin;
+	private String koji_kanryo_end;
+	private List<Map<String,Object>> list;
+	private String searchFlg = "0";
+	private String page;
+	private String startPage;
+	
+	
+}

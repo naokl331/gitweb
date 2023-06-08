@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Katodo System</h1>
+	<h3>Login</h3>
+	<div>
+		<div>
+			<div>
+				<form action="login" method="post">
+					<label>ID:</label>
+					<input type="text" name="id" th:value="${loginData.id}">
+					<label>Password:</label>
+					<input type="password" name="pass" th:value="${loginData.pass}">
+					<button type="submit">LOGIN</button>
+				</form>
+				<div th;text="${loginData.msg}"></div>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>

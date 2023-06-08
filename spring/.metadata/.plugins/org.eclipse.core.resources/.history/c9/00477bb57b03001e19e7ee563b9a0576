@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>header</title>
+<link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<h2 class="text-center">Katodo System</h2>
+		</div>
+		
+		<div class="row justify-content-end">
+			<div class="col-6">
+				<label>年度:</label>
+				<input type="text" th:value="${session.year}" readonly>
+				<span th:text="${session.name}"></span>
+				<a class="link-warning" href="menu">メニューへ</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

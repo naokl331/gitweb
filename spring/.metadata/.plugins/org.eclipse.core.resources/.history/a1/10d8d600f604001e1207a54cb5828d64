@@ -1,0 +1,28 @@
+package com.example.katodo.restcontroller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.katodo.data.CustomerData;
+import com.example.katodo.repositry.CustomerRepository;
+
+@RestController
+public class UpdateCustomerController {
+
+	@Autowired
+	CustomerRepository cr;
+	
+	//------------------------------------------------
+	//			  得意先編集完了画面表示
+	//------------------------------------------------
+	@PostMapping("/editCustomer")
+	public void updateCustomer(@ModelAttribute("cd") CustomerData cd , Model model) {
+		
+		cr.getEditData(cd);
+		
+	}
+	
+}

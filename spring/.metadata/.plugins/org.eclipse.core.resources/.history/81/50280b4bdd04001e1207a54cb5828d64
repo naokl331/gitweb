@@ -1,0 +1,38 @@
+package com.example.katodo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.katodo.data.CustomerData;
+import com.example.katodo.repositry.CustomerRepository;
+
+@Controller
+public class CustomerController {
+	
+	@Autowired
+	CustomerRepository cr;
+	
+	//------------------------------------------------
+	//			  得意先画面の初期表示
+	//------------------------------------------------
+	@GetMapping("/customer")
+	public String index() {
+		return "customerList";	//htmlを投げる
+	}
+	
+	
+	@PostMapping("/getList4Customer")
+	public String getList(@ModelAttribute("cd") CustomerData cd , Model model) {
+		//System.out.println(model.toString());
+		
+		cr.getCustomerList(cd);
+		
+		//System.out.println(model.toString());
+		
+		return "customerTable";
+	}
+}

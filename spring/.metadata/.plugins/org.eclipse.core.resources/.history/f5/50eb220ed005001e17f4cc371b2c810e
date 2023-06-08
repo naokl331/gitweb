@@ -1,0 +1,43 @@
+package com.example.katodo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.katodo.data.CustomerData;
+import com.example.katodo.data.EdmngData;
+import com.example.katodo.repositry.EdmngRepository;
+
+@Controller
+public class EdmngController {
+
+	
+	@Autowired
+	EdmngRepository er;
+	
+	//------------------------------------------------
+	//			  受注管理画面表示
+	//------------------------------------------------
+	@GetMapping("/edmng")
+	public String index(@ModelAttribute("ed") EdmngData ed, Model model) {
+		
+		return "edmng";
+	}
+	
+	
+	//------------------------------------------------
+	//			  得意先リストの表示(挿入)
+	//------------------------------------------------
+	@PostMapping("/getList4Edmng")
+	public String getList(@ModelAttribute("cd") CustomerData cd , Model model) {
+
+		cr.getCustomerList(cd);
+		
+		return "customerTable";
+	}
+	
+	
+}

@@ -1,0 +1,84 @@
+package com.example.katodo.repositry;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.example.katodo.data.EdmngData;
+
+@Repository
+public class EdmngRepository {
+
+	@Autowired
+	JdbcTemplate jt;
+	
+	//--------------------------------------------
+	//	受注管理ページネーション用ページ数
+	//--------------------------------------------
+	public int getPageCount(EdmngData ed) {
+		//SQLの動的生成と、パラメータのセット
+		StringBuilder sql = new StringBuilder();
+		StringBuilder where = new StringBuilder();
+		List<Object> param = new ArrayList<Object>();
+		
+		//基本的なSQL
+		sql.append("select ");
+		sql.append("d01.kanri_no,");
+		sql.append("m02.tokuisaki_name,");
+		sql.append("d01.bukken_name,");
+		sql.append("d01.tanto,");
+		sql.append("d01.bumon,");
+		sql.append("d01.koji_kanryo_date,");
+		sql.append("d01.e_date,");
+		sql.append("d01.d_date,");
+		sql.append("d01.hachu_no ");
+		sql.append("from ");
+		sql.append("d01_eddb as d01 ");	//d01_eddbをd01と命名し
+		sql.append("inner join m02_tokuisaki as m02 "); //d01とm02と命名したm02_tokuisakiを内部結合したく
+		sql.append("on d01.tokuisaki_no = m02.tokuisaki_no"); //それぞれのtokuisaki_noで結合する
+		
+		//得意先名
+		if(ed.getTokuisaki_name().length > 0) {
+			where.append("name tokuisaki_name like ? ");
+			param.add("%" + cd.getTokuisaki_name() + "%");
+		}
+		
+		//ﾌﾘｶﾞﾅ
+		if(!cd.getHurigana().equals("")) {
+			if(where.length() == 0) {
+				where.append("where hurigana like ? ");
+			}else {
+				where.append("and hurigana like ? ");
+			}
+			param.add("%" + cd.getHurigana() + "%");
+		}
+		
+		//担当
+		if(!cd.getTanto().equals("")) {
+			if(where.length() == 0) {
+				where.append("where tanto like ?");
+			}else {
+				where.append("and tanto like ?");
+			}
+			param.add("%" + cd.getTanto() + "%");
+		}
+		
+		//SQLにWhere句を追加
+		sql.append(where.toString());
+		
+		//実行
+		Map<String,Object> map = jt.queryForMap(sql.toString(),param.toArray());
+		int rec = Integer.parseInt(map.get("cnt").toString());
+		int pageCnt = rec / 25;
+		if(rec % 25 > 0) pageCnt++;
+		
+		return pageCnt;
+		
+	}
+	
+	
+}
